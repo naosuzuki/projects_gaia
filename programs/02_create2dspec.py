@@ -8,7 +8,7 @@ import fitsio
 from astropy.io import fits
 
 # 2022-07-08 LBNL
-def read_xpspectra(csvfilelist,outputfits):
+def read_xpspectra(csvfilelist,outputcsv,outputfits):
 
    count=0
    for i in range(len(csvfilelist)):
@@ -47,7 +47,8 @@ def read_xpspectra(csvfilelist,outputfits):
       del df
 
    dfid=pd.DataFrame(source_id_list,columns=['source_id'])
-   dfid.to_csv('gaiaid_sdss_star.csv',index=False)
+   #dfid.to_csv('gaiaid_sdss_star.csv',index=False)
+   dfid.to_csv(outputcsv,index=False)
 
    hdu1=fits.PrimaryHDU(imageflux)
    hdu2=fits.ImageHDU(imagefluxerr)
@@ -81,6 +82,7 @@ csvfilelist=['../data/gaiadr3xp_sdssdr17_01.csv',\
 '../data/gaiadr3xp_sdssdr17_12.csv',\
 '../data/gaiadr3xp_sdssdr17_13.csv']
 outputfits='gaiaxpspec_sdssstar.fits'
+outputcsv ='gaiadr3id_sdssdr17_star.csv'
 
 csvfilelist=['../data/gaiadr3xp_sdssdr17quasar_01.csv',\
 '../data/gaiadr3xp_sdssdr17quasar_02.csv',\
@@ -89,4 +91,5 @@ csvfilelist=['../data/gaiadr3xp_sdssdr17quasar_01.csv',\
 '../data/gaiadr3xp_sdssdr17quasar_05.csv',\
 '../data/gaiadr3xp_sdssdr17quasar_06.csv']
 outputfits='gaiaxpspec_sdssquasar.fits'
-read_xpspectra(csvfilelist,outputfits)
+outputcsv ='gaiadr3id_sdssdr17_quasar.csv'
+read_xpspectra(csvfilelist,outputcsv,outputfits)
