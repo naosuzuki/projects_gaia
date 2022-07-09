@@ -7,7 +7,8 @@ import pandas as pd
 import fitsio
 from astropy.io import fits
 
-def read_xpspectra(csvfilelist):
+# 2022-07-08 LBNL
+def read_xpspectra(csvfilelist,outputfits):
 
    count=0
    for i in range(len(csvfilelist)):
@@ -45,14 +46,16 @@ def read_xpspectra(csvfilelist):
       print('writing fits',i)
       del df
 
+   dfid=pd.DataFrame(source_id_list,columns=['source_id'])
+   dfid.to_csv('gaiaid_sdss_star.csv',index=False)
+
    hdu1=fits.PrimaryHDU(imageflux)
    hdu2=fits.ImageHDU(imagefluxerr)
 
-   #prihdr=hdulist[0].header
    col1=fits.Column(name='source_id',format='K',array=source_id_list)
    cols=fits.ColDefs([col1])
-   #tbhdu=fits.new_table(cols)
    tbhdu=fits.BinTableHDU.from_columns(cols)
+
    hdulist=fits.HDUList([hdu1,hdu2,tbhdu])
    hdr=hdulist[0].header
    hdr.set('COEFF0',coeff0)
@@ -61,13 +64,9 @@ def read_xpspectra(csvfilelist):
    hdr['comment']='1st EXT=Flux, 2nd EXT=Flux Err, 3rd source_id'
    hdr['comment']='GAIA DR3 XP spectra x SDSS DR17 Stars'
    hdr['comment']='Wavelength=1.0**(COEFF0+COEFF1*i)'
-   #hdulist=fits.HDUList([hdu1])
-#  hdulist=fits.HDUList([hdu1,hdu2])
-   hdulist.writeto('gaiaxpspec.fits')
+   #hdulist.writeto('gaiaxpspec.fits')
+   hdulist.writeto(outputfits)
 
-   #fitsio.write('gaiaxp.fits',imageflux)
-
-#csvfile='../data/XP_CONTINUOUS_COMBINED.csv'
 csvfilelist=['../data/gaiadr3xp_sdssdr17_01.csv',\
 '../data/gaiadr3xp_sdssdr17_02.csv',\
 '../data/gaiadr3xp_sdssdr17_03.csv',\
@@ -81,4 +80,13 @@ csvfilelist=['../data/gaiadr3xp_sdssdr17_01.csv',\
 '../data/gaiadr3xp_sdssdr17_11.csv',\
 '../data/gaiadr3xp_sdssdr17_12.csv',\
 '../data/gaiadr3xp_sdssdr17_13.csv']
-read_xpspectra(csvfilelist)
+outputfits='gaiaxpspec_sdssstar.fits'
+
+csvfilelist=['../data/gaiadr3xp_sdssdr17quasar_01.csv',\
+'../data/gaiadr3xp_sdssdr17quasar_02.csv',\
+'../data/gaiadr3xp_sdssdr17quasar_03.csv',\
+'../data/gaiadr3xp_sdssdr17quasar_04.csv',\
+'../data/gaiadr3xp_sdssdr17quasar_05.csv',\
+'../data/gaiadr3xp_sdssdr17quasar_06.csv']
+outputfits='gaiaxpspec_sdssquasar.fits'
+read_xpspectra(csvfilelist,outputfits)
