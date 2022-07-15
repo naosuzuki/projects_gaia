@@ -68,28 +68,28 @@ def read_xpspectra(csvfilelist,outputcsv,outputfits):
    #hdulist.writeto('gaiaxpspec.fits')
    hdulist.writeto(outputfits)
 
-csvfilelist=['../data/gaiadr3xp_sdssdr17_01.csv',\
-'../data/gaiadr3xp_sdssdr17_02.csv',\
-'../data/gaiadr3xp_sdssdr17_03.csv',\
-'../data/gaiadr3xp_sdssdr17_04.csv',\
-'../data/gaiadr3xp_sdssdr17_05.csv',\
-'../data/gaiadr3xp_sdssdr17_06.csv',\
-'../data/gaiadr3xp_sdssdr17_07.csv',\
-'../data/gaiadr3xp_sdssdr17_08.csv',\
-'../data/gaiadr3xp_sdssdr17_09.csv',\
-'../data/gaiadr3xp_sdssdr17_10.csv',\
-'../data/gaiadr3xp_sdssdr17_11.csv',\
-'../data/gaiadr3xp_sdssdr17_12.csv',\
-'../data/gaiadr3xp_sdssdr17_13.csv']
+csvfilelist=['../data_xp/gaiadr3xp_sdssdr17_01.csv',\
+'../data_xp/gaiadr3xp_sdssdr17_02.csv',\
+'../data_xp/gaiadr3xp_sdssdr17_03.csv',\
+'../data_xp/gaiadr3xp_sdssdr17_04.csv',\
+'../data_xp/gaiadr3xp_sdssdr17_05.csv',\
+'../data_xp/gaiadr3xp_sdssdr17_06.csv',\
+'../data_xp/gaiadr3xp_sdssdr17_07.csv',\
+'../data_xp/gaiadr3xp_sdssdr17_08.csv',\
+'../data_xp/gaiadr3xp_sdssdr17_09.csv',\
+'../data_xp/gaiadr3xp_sdssdr17_10.csv',\
+'../data_xp/gaiadr3xp_sdssdr17_11.csv',\
+'../data_xp/gaiadr3xp_sdssdr17_12.csv',\
+'../data_xp/gaiadr3xp_sdssdr17_13.csv']
 outputfits='gaiaxpspec_sdssstar.fits'
 outputcsv ='gaiadr3id_sdssdr17_star.csv'
 
-csvfilelist=['../data/gaiadr3xp_sdssdr17quasar_01.csv',\
-'../data/gaiadr3xp_sdssdr17quasar_02.csv',\
-'../data/gaiadr3xp_sdssdr17quasar_03.csv',\
-'../data/gaiadr3xp_sdssdr17quasar_04.csv',\
-'../data/gaiadr3xp_sdssdr17quasar_05.csv',\
-'../data/gaiadr3xp_sdssdr17quasar_06.csv']
+csvfilelist=['../data_xp/gaiadr3xp_sdssdr17quasar_01.csv',\
+'../data_xp/gaiadr3xp_sdssdr17quasar_02.csv',\
+'../data_xp/gaiadr3xp_sdssdr17quasar_03.csv',\
+'../data_xp/gaiadr3xp_sdssdr17quasar_04.csv',\
+'../data_xp/gaiadr3xp_sdssdr17quasar_05.csv',\
+'../data_xp/gaiadr3xp_sdssdr17quasar_06.csv']
 outputfits='gaiaxpspec_sdssquasar.fits'
 outputcsv ='gaiadr3id_sdssdr17_quasar.csv'
 read_xpspectra(csvfilelist,outputcsv,outputfits)
