@@ -2,3 +2,5 @@
 GAIA satellite data analysis
 XP spectra are used for SDSS spectra calibration
 SDSS photometry is also checked
+We aim to make SDSS spectra to be spectrophotometric
+
