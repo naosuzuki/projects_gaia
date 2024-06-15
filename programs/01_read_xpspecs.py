@@ -6,6 +6,7 @@ import sys
 import pandas as pd
 import fitsio
 
+
 def read_xpspectra(csvfile):
    df=pd.read_csv(csvfile)
    print(df.loc[0])
