@@ -1,6 +1,6 @@
 # Ignore Large Files
 
-data/
+#data/
 #csvfiles/
 
 # Byte-compiled / optimized / DLL files
