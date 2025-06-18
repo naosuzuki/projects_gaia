@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy
 
+# 2025-06-17 rewritten at FSU
+
 def plot_HRdiagramSNR(csvfile):
    df=pd.read_csv(csvfile)
    print(df)
