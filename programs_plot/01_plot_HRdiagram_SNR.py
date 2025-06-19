@@ -6,53 +6,55 @@ import numpy
 # 2025-06-19 update
 # 2025-06-17 rewritten at FSU
 
-def plot_HRdiagramSNR(csvfile):
+def plot_HRdiagramSNR(csvfile,snr,sdssdr):
    df=pd.read_csv(csvfile)
-   print(df)
-   print(len(df))
-   df1=df[(df['parallax_over_error']>=20.0) & (df['parallax']>0.0)]
-   #df1=df[(df['parallax_over_error']>=100.0) & (df['parallax']>0.0)]
+# Extract data above Parallax SNR threshold
+   df1=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0)]
    df2=df1[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
-   print(len(df1))
-   print(df2)
+
+# Extract Color
    x=df2['bp_rp'].to_numpy()
+# GAIA g-mag
    gmag=df2['phot_g_mean_mag'].to_numpy()
+# Extract Parallax
    parallax=df2['parallax'].to_numpy()
+# Convert g-mag to Absolute Magnitude
    y=gmag+5.0*numpy.log10(parallax)-10.0
    z=df2['parallax_over_error']
-   print(x,y)
-   print('parallax=',parallax)
-   print('gmag=',gmag)
 
    # Plotting the HR diagram
-   #plt.figure(figsize=(8, 6))
-   #plt.figure(figsize=(6, 9))
    plt.rcParams['font.family'] = 'Times New Roman'
    plt.figure(figsize=(8.5, 11))
 # Invert Y-axis: brighter stars are at the top
    plt.gca().invert_yaxis()
+# X-Y range
    plt.xlim(-1.2,5.2)
    plt.ylim(17.4,-4.5)
-   plt.xticks(fontsize=16)
-   plt.yticks(fontsize=16)
-   #sc = plt.scatter(df['bp_rp'], df['abs_g'], c=df['snr'], cmap='viridis', s=20, edgecolor='k')
-   #sc = plt.scatter(x, y, c=z, cmap='viridis', s=0.01, edgecolor='k')
-   #sc = plt.scatter(x, y, c=z, cmap='rainbow', s=0.01, edgecolor='k', vmin=0.0,vmax=100.0)
-   sc = plt.scatter(x, y, c=z, cmap='rainbow', s=0.01, vmin=20.0,vmax=50.0)
-
+   plt.xticks(fontsize=20)
+   plt.yticks(fontsize=20)
+   plt.tick_params(direction='in') 
+   if(snr==5): snrmin=5.0   ; snrmax=50.0
+   if(snr==10): snrmin=10.0 ; snrmax=100.0
+   if(snr==20): snrmin=20.0 ; snrmax=100.0
+   if(snr==50): snrmin=50.0 ; snrmax=200.0
+   if(snr==100): snrmin=100.0 ; snrmax=200.0
+   sc = plt.scatter(x, y, c=z, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
 
 # Add colorbar for SNR
    cbar = plt.colorbar(sc)
-   cbar.set_label('Signal-to-Noise Ratio (SNR)',fontsize=16)
+   cbar.set_label('Parallax Signal-to-Noise Ratio (SNR)',fontsize=20)
 
 # Labels and title
-   plt.xlabel('BP - RP Color',fontsize=16)
-   plt.ylabel('Absolute Magnitude M$_{G}$',fontsize=16)
-   plt.title('Hertzsprung–Russell Diagram (colored by SNR)',fontsize=16)
+   plt.xlabel('BP - RP Color',fontsize=20)
+   plt.ylabel('Absolute Magnitude M$_{G}$',fontsize=20)
+   plt.title('Hertzsprung–Russell Diagram \
+   (colored by Parallax SNR)\nSDSS DR8 vs. GAIA DR3 : '\
+   +str(len(x))+' Stars',fontsize=20)
 
    plt.tight_layout()
    plt.savefig('hr20.png')
 
-csvfile='../csvfiles/gaiadr3_sdssdr8_star.csv'
 csvfile='../csvfiles/gaiadr3_sdssdr17_star.csv'
-plot_HRdiagramSNR(csvfile)
+csvfile='../csvfiles/gaiadr3_sdssdr8_star.csv'
+snr=20.0 ; sdssdr='DR8'
+plot_HRdiagramSNR(csvfile,snr,sdssdr)
