@@ -14,17 +14,26 @@ def plot_parallax_SNR_histogram2(csvfile1,csvfile2):
    df2=df1[['parallax','parallax_over_error']]
    snr_arr1=df2['parallax_over_error'].to_numpy()
 
+   df3=pd.read_csv(csvfile2)
+# Extract data above Parallax SNR threshold
+   df4=df3[df3['parallax']>0.0]
+   df5=df4[['parallax','parallax_over_error']]
+   snr_arr2=df5['parallax_over_error'].to_numpy()
+
    bins=numpy.arange(20)*10.0
+   bin_width = bins[1] - bins[0]
    plt.rcParams["font.family"] = "Times New Roman"
-   plt.title('GAIA DR3')
-   plt.xlabel('GAIA DR3 SNR')
+   plt.title('GAIA DR3 vs. SDSS Spectra')
+   plt.xlabel('GAIA DR3 Parallax SNR')
    plt.ylabel('Number of Stars')
    plt.xlim([-5,205])
    plt.tick_params(axis='both',which='both',direction='in') 
    plt.ylim([1.2,4.0e5])
 
-   plt.hist(snr_arr1,bins,log=True,align='left',rwidth=0.9,color='r')
-   plt.savefig('histexp.png')
+   plt.hist(snr_arr1,bins=bins-bin_width/5,log=True,align='mid',width=bin_width/2,color='b',alpha=0.5,label='SDSS DR8')
+   plt.hist(snr_arr2,bins=bins+bin_width/5,log=True,align='mid',width=bin_width/2,color='r',alpha=0.5,label='SDSS DR17')
+   plt.legend()
+   plt.savefig('GAIADR3vsSDSS_histogram.png')
 
 def plot_parallax_SNR_histogram(csvfile):
    df=pd.read_csv(csvfile)
@@ -93,14 +102,19 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr):
    plt.tight_layout()
    plt.savefig('20250619_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
 
-snr=20 ; sdssdr='DR8'
-csvfile='../csvfiles/gaiadr3_sdssdr8_star.csv'
+#SDSS DR8
+csvfile1='../csvfiles/gaiadr3_sdssdr8_star.csv'
 
-snr=20 ; sdssdr='DR17'
-csvfile='../csvfiles/gaiadr3_sdssdr17_star.csv'
-plot_parallax_SNR_histogram(csvfile)
+#SDSS DR17
+csvfile2='../csvfiles/gaiadr3_sdssdr17_star.csv'
+
+# Draw SNR Histogram
+plot_parallax_SNR_histogram2(csvfile1,csvfile2)
 sys.exit(1)
 
 for snr in [5,10,20,50,100,200]:
    print(snr)
-   plot_HRdiagramSNR(csvfile,snr,sdssdr)
+   sdssdr='DR8'
+   plot_HRdiagramSNR(csvfile1,snr,sdssdr)
+   sdssdr='DR17'
+   plot_HRdiagramSNR(csvfile2,snr,sdssdr)
