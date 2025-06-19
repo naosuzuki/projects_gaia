@@ -34,10 +34,11 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr):
    plt.yticks(fontsize=20)
    plt.tick_params(direction='in') 
    if(snr==5): snrmin=5.0   ; snrmax=50.0
-   if(snr==10): snrmin=10.0 ; snrmax=100.0
-   if(snr==20): snrmin=20.0 ; snrmax=100.0
+   if(snr==10): snrmin=10.0 ; snrmax=50.0
+   if(snr==20): snrmin=20.0 ; snrmax=50.0
    if(snr==50): snrmin=50.0 ; snrmax=200.0
    if(snr==100): snrmin=100.0 ; snrmax=200.0
+   if(snr==200): snrmin=200.0 ; snrmax=500.0
    sc = plt.scatter(x, y, c=z, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
 
 # Add colorbar for SNR
@@ -48,13 +49,16 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr):
    plt.xlabel('BP - RP Color',fontsize=20)
    plt.ylabel('Absolute Magnitude M$_{G}$',fontsize=20)
    plt.title('Hertzsprung–Russell Diagram \
-   (colored by Parallax SNR)\nSDSS DR8 vs. GAIA DR3 : '\
-   +str(len(x))+' Stars',fontsize=20)
+   (colored by Parallax SNR)\nSDSS '+sdssdr+' vs. GAIA DR3 : '\
+   +str(len(x))+' Stars,  SNR>'+str(snr),fontsize=20)
 
    plt.tight_layout()
-   plt.savefig('hr20.png')
+   plt.savefig('20250619_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
 
-csvfile='../csvfiles/gaiadr3_sdssdr17_star.csv'
+snr=20 ; sdssdr='DR8'
 csvfile='../csvfiles/gaiadr3_sdssdr8_star.csv'
-snr=20.0 ; sdssdr='DR8'
-plot_HRdiagramSNR(csvfile,snr,sdssdr)
+snr=20 ; sdssdr='DR17'
+csvfile='../csvfiles/gaiadr3_sdssdr17_star.csv'
+for snr in [5,10,20,50,100,200]:
+   print(snr)
+   plot_HRdiagramSNR(csvfile,snr,sdssdr)
