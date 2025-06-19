@@ -2,15 +2,47 @@ import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy
+import sys
 
 # 2025-06-19 update
 # 2025-06-17 rewritten at FSU
+
+def plot_parallax_SNR_histogram2(csvfile1,csvfile2):
+   df=pd.read_csv(csvfile1)
+# Extract data above Parallax SNR threshold
+   df1=df[df['parallax']>0.0]
+   df2=df1[['parallax','parallax_over_error']]
+   snr_arr1=df2['parallax_over_error'].to_numpy()
+
+   bins=numpy.arange(20)*10.0
+   plt.rcParams["font.family"] = "Times New Roman"
+   plt.title('GAIA DR3')
+   plt.xlabel('GAIA DR3 SNR')
+   plt.ylabel('Number of Stars')
+   plt.xlim([-5,205])
+   plt.tick_params(axis='both',which='both',direction='in') 
+   plt.ylim([1.2,4.0e5])
+
+   plt.hist(snr_arr1,bins,log=True,align='left',rwidth=0.9,color='r')
+   plt.savefig('histexp.png')
 
 def plot_parallax_SNR_histogram(csvfile):
    df=pd.read_csv(csvfile)
 # Extract data above Parallax SNR threshold
    df1=df[df['parallax']>0.0]
    df2=df1[['parallax','parallax_over_error']]
+   snr_arr=df2['parallax_over_error'].to_numpy()
+
+   bins=numpy.arange(20)*10.0
+   plt.rcParams["font.family"] = "Times New Roman"
+   plt.title('GAIA DR3')
+   plt.xlabel('GAIA DR3 SNR')
+   plt.ylabel('Number of Stars')
+   plt.xlim([-5,205])
+   plt.tick_params(axis='both',which='both',direction='in') 
+   plt.ylim([1.2,4.0e5])
+   plt.hist(snr_arr,bins,log=True,align='left',rwidth=0.9,color='r')
+   plt.savefig('histexp.png')
 
 def plot_HRdiagramSNR(csvfile,snr,sdssdr):
    df=pd.read_csv(csvfile)
@@ -63,8 +95,11 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr):
 
 snr=20 ; sdssdr='DR8'
 csvfile='../csvfiles/gaiadr3_sdssdr8_star.csv'
+
 snr=20 ; sdssdr='DR17'
 csvfile='../csvfiles/gaiadr3_sdssdr17_star.csv'
+plot_parallax_SNR_histogram(csvfile)
+sys.exit(1)
 
 for snr in [5,10,20,50,100,200]:
    print(snr)
