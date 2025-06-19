@@ -6,6 +6,12 @@ import numpy
 # 2025-06-19 update
 # 2025-06-17 rewritten at FSU
 
+def plot_parallax_SNR_histogram(csvfile):
+   df=pd.read_csv(csvfile)
+# Extract data above Parallax SNR threshold
+   df1=df[df['parallax']>0.0]
+   df2=df1[['parallax','parallax_over_error']]
+
 def plot_HRdiagramSNR(csvfile,snr,sdssdr):
    df=pd.read_csv(csvfile)
 # Extract data above Parallax SNR threshold
@@ -59,6 +65,7 @@ snr=20 ; sdssdr='DR8'
 csvfile='../csvfiles/gaiadr3_sdssdr8_star.csv'
 snr=20 ; sdssdr='DR17'
 csvfile='../csvfiles/gaiadr3_sdssdr17_star.csv'
+
 for snr in [5,10,20,50,100,200]:
    print(snr)
    plot_HRdiagramSNR(csvfile,snr,sdssdr)
