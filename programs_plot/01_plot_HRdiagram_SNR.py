@@ -33,7 +33,7 @@ def plot_parallax_SNR_histogram2(csvfile1,csvfile2):
    plt.hist(snr_arr1,bins=bins-bin_width/5,log=True,align='mid',width=bin_width/2,color='b',alpha=0.5,label='SDSS DR8')
    plt.hist(snr_arr2,bins=bins+bin_width/5,log=True,align='mid',width=bin_width/2,color='r',alpha=0.5,label='SDSS DR17')
    plt.legend()
-   plt.savefig('GAIADR3vsSDSS_histogram.png')
+   plt.savefig('20250619_GAIADR3vsSDSS_histogram.png')
 
 def plot_parallax_SNR_histogram(csvfile):
    df=pd.read_csv(csvfile)
