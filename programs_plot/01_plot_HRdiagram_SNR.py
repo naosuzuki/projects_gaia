@@ -57,19 +57,33 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr):
    df=pd.read_csv(csvfile)
 # Extract data above Parallax SNR threshold
 # SNR Condition
-   df1=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0)]
+# Binary Exclusion is added on 6/20/2025
+   df1=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0) \
+   & (df['non_single_star']==False) & (df['ruwe']<1.4) \
+   & (df['phot_variable_flag']!='VARIABLE')]
 # Extract 4 columns
    df2=df1[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
 
+# Binary Data
+   df3=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0) \
+   & ((df['non_single_star']==True) | (df['ruwe']>1.4))]
+   df4=df3[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
+
 # Extract Color
    x=df2['bp_rp'].to_numpy()
+   x2=df4['bp_rp'].to_numpy()
 # GAIA g-mag
    gmag=df2['phot_g_mean_mag'].to_numpy()
+   gmag2=df4['phot_g_mean_mag'].to_numpy()
 # Extract Parallax
    parallax=df2['parallax'].to_numpy()
+   parallax2=df4['parallax'].to_numpy()
 # Convert g-mag to Absolute Magnitude
    y=gmag+5.0*numpy.log10(parallax)-10.0
+   y2=gmag2+5.0*numpy.log10(parallax2)-10.0
+# Parallax SNR
    z=df2['parallax_over_error']
+   z2=df4['parallax_over_error']
 
    # Plotting the HR diagram
    plt.rcParams['font.family'] = 'Times New Roman'
@@ -88,7 +102,8 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr):
    if(snr==50): snrmin=50.0 ; snrmax=200.0
    if(snr==100): snrmin=100.0 ; snrmax=200.0
    if(snr==200): snrmin=200.0 ; snrmax=500.0
-   sc = plt.scatter(x, y, c=z, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
+   sc = plt.scatter(x2, y2, c=z2, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
+   #sc = plt.scatter(x, y, c=z, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
 
 # Add colorbar for SNR
    cbar = plt.colorbar(sc)
@@ -102,7 +117,8 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr):
    +str(len(x))+' Stars,  SNR>'+str(snr),fontsize=20)
 
    plt.tight_layout()
-   plt.savefig('20250619_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
+   #plt.savefig('20250619_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
+   plt.savefig('20250620b_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
 
 #SDSS DR8
 csvfile1='../csvfiles/gaiadr3_sdssdr8_star.csv'
@@ -112,7 +128,6 @@ csvfile2='../csvfiles/gaiadr3_sdssdr17_star.csv'
 
 # Draw SNR Histogram
 plot_parallax_SNR_histogram2(csvfile1,csvfile2)
-sys.exit(1)
 
 for snr in [5,10,20,50,100,200]:
    print(snr)
