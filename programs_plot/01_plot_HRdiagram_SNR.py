@@ -56,7 +56,9 @@ def plot_parallax_SNR_histogram(csvfile):
 def plot_HRdiagramSNR(csvfile,snr,sdssdr):
    df=pd.read_csv(csvfile)
 # Extract data above Parallax SNR threshold
+# SNR Condition
    df1=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0)]
+# Extract 4 columns
    df2=df1[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
 
 # Extract Color
