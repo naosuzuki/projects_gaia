@@ -64,26 +64,36 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
 # Extract 4 columns
    df2=df1[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
 
-# Binary Data
+# Binary Star Data
    df3=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0) \
    & ((df['non_single_star']==True) | (df['ruwe']>1.4))]
    df4=df3[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
 
+# Variable Star Data
+   df5=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0) \
+   & (df['phot_variable_flag']=='VARIABLE')]
+   df6=df5[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
+
 # Extract Color
    x=df2['bp_rp'].to_numpy()
    x2=df4['bp_rp'].to_numpy()
+   x3=df6['bp_rp'].to_numpy()
 # GAIA g-mag
    gmag=df2['phot_g_mean_mag'].to_numpy()
    gmag2=df4['phot_g_mean_mag'].to_numpy()
+   gmag3=df6['phot_g_mean_mag'].to_numpy()
 # Extract Parallax
    parallax=df2['parallax'].to_numpy()
    parallax2=df4['parallax'].to_numpy()
+   parallax3=df6['parallax'].to_numpy()
 # Convert g-mag to Absolute Magnitude
    y=gmag+5.0*numpy.log10(parallax)-10.0
    y2=gmag2+5.0*numpy.log10(parallax2)-10.0
+   y3=gmag3+5.0*numpy.log10(parallax3)-10.0
 # Parallax SNR
    z=df2['parallax_over_error']
    z2=df4['parallax_over_error']
+   z3=df6['parallax_over_error']
 
    # Plotting the HR diagram
    plt.rcParams['font.family'] = 'Times New Roman'
@@ -106,6 +116,8 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
       sc = plt.scatter(x, y, c=z, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
    elif(flag_binary==True):
       sc = plt.scatter(x2, y2, c=z2, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
+      if(len(x3)>1):
+        plt.scatter(x3, y3, c=z3, cmap='rainbow', s=1.0, vmin=snrmin,vmax=snrmax)
 
 # Add colorbar for SNR
    cbar = plt.colorbar(sc)
@@ -124,7 +136,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
    elif(flag_binary==True):
      plt.title('Hertzsprung–Russell Diagram \
      (colored by Parallax SNR)\nSDSS '+sdssdr+' vs. GAIA DR3 : '\
-     +str(len(x2))+'Binary Stars,  SNR>'+str(snr),fontsize=20)
+     +str(len(x2))+'Binary Stars, '+str(len(x3))+'Variables  SNR>'+str(snr),fontsize=20)
      plt.tight_layout()
      plt.savefig('20250620b_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
    plt.clf()
