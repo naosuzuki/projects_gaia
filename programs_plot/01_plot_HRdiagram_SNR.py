@@ -53,7 +53,7 @@ def plot_parallax_SNR_histogram(csvfile):
    plt.hist(snr_arr,bins,log=True,align='left',rwidth=0.9,color='r')
    plt.savefig('histexp.png')
 
-def plot_HRdiagramSNR(csvfile,snr,sdssdr):
+def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
    df=pd.read_csv(csvfile)
 # Extract data above Parallax SNR threshold
 # SNR Condition
@@ -102,8 +102,10 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr):
    if(snr==50): snrmin=50.0 ; snrmax=200.0
    if(snr==100): snrmin=100.0 ; snrmax=200.0
    if(snr==200): snrmin=200.0 ; snrmax=500.0
-   sc = plt.scatter(x2, y2, c=z2, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
-   #sc = plt.scatter(x, y, c=z, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
+   if(flag_binary==False):
+      sc = plt.scatter(x, y, c=z, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
+   elif(flag_binary==True):
+      sc = plt.scatter(x2, y2, c=z2, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
 
 # Add colorbar for SNR
    cbar = plt.colorbar(sc)
@@ -112,13 +114,21 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr):
 # Labels and title
    plt.xlabel('BP - RP Color',fontsize=20)
    plt.ylabel('Absolute Magnitude M$_{G}$',fontsize=20)
-   plt.title('Hertzsprung–Russell Diagram \
-   (colored by Parallax SNR)\nSDSS '+sdssdr+' vs. GAIA DR3 : '\
-   +str(len(x))+' Stars,  SNR>'+str(snr),fontsize=20)
 
-   plt.tight_layout()
-   #plt.savefig('20250619_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
-   plt.savefig('20250620b_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
+   if(flag_binary==False):
+     plt.title('Hertzsprung–Russell Diagram \
+     (colored by Parallax SNR)\nSDSS '+sdssdr+' vs. GAIA DR3 : '\
+     +str(len(x))+' Stars,  SNR>'+str(snr),fontsize=20)
+     plt.tight_layout()
+     plt.savefig('20250620a_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
+   elif(flag_binary==True):
+     plt.title('Hertzsprung–Russell Diagram \
+     (colored by Parallax SNR)\nSDSS '+sdssdr+' vs. GAIA DR3 : '\
+     +str(len(x2))+'Binary Stars,  SNR>'+str(snr),fontsize=20)
+     plt.tight_layout()
+     plt.savefig('20250620b_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
+   plt.clf()
+   plt.close()
 
 #SDSS DR8
 csvfile1='../csvfiles/gaiadr3_sdssdr8_star.csv'
@@ -132,6 +142,12 @@ plot_parallax_SNR_histogram2(csvfile1,csvfile2)
 for snr in [5,10,20,50,100,200]:
    print(snr)
    sdssdr='DR8'
-   plot_HRdiagramSNR(csvfile1,snr,sdssdr)
+   flag_binary=True
+   plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary)
+   flag_binary=False
+   plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary)
    sdssdr='DR17'
-   plot_HRdiagramSNR(csvfile2,snr,sdssdr)
+   flag_binary=True
+   plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary)
+   flag_binary=False
+   plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary)
