@@ -117,7 +117,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
    elif(flag_binary==True):
       sc = plt.scatter(x2, y2, c=z2, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
       if(len(x3)>1):
-        plt.scatter(x3, y3, c=z3, cmap='rainbow', s=1.0, vmin=snrmin,vmax=snrmax)
+        plt.scatter(x3, y3, c=z3, cmap='rainbow', s=3.0, marker='o', facecolors='none', vmin=snrmin,vmax=snrmax)
 
 # Add colorbar for SNR
    cbar = plt.colorbar(sc)
