@@ -6,10 +6,9 @@ import sys
 from datetime import date
 
 #today_str = date.today().strftime("%Y-%m-%d")
-today_str = date.today().strftime("%Y%m%d")
-print(today_str)
-
-sys.exit(1)
+#today_str = date.today().strftime("%Y%m%d")
+#print(today_str)
+#sys.exit(1)
 
 # 2025-06-19 update
 # 2025-06-17 rewritten at FSU
