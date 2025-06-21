@@ -160,6 +160,6 @@ for snr in [5,10,20,50,100,200]:
    plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary)
    sdssdr='DR17'
    flag_binary=True
-   plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary)
+   plot_HRdiagramSNR(csvfile2,snr,sdssdr,flag_binary)
    flag_binary=False
-   plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary)
+   plot_HRdiagramSNR(csvfile2,snr,sdssdr,flag_binary)
