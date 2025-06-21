@@ -3,6 +3,13 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy
 import sys
+from datetime import date
+
+#today_str = date.today().strftime("%Y-%m-%d")
+today_str = date.today().strftime("%Y%m%d")
+print(today_str)
+
+sys.exit(1)
 
 # 2025-06-19 update
 # 2025-06-17 rewritten at FSU
@@ -127,20 +134,24 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
    plt.xlabel('BP - RP Color',fontsize=20)
    plt.ylabel('Absolute Magnitude M$_{G}$',fontsize=20)
 
+# Today's String YYYYMMDD
+   today_str = date.today().strftime("%Y%m%d")
    if(flag_binary==False):
      plt.title('Hertzsprung–Russell Diagram \
      (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3 : '\
      +str(len(x))+' Stars,  SNR>'+str(snr),fontsize=20)
      plt.tight_layout()
-     plt.savefig('20250620a_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
+     plt.savefig(today_str+'a_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
    elif(flag_binary==True):
      plt.title('Hertzsprung–Russell Diagram \
      (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3: '\
      +str(len(x2))+' Binaries, '+str(len(x3))+' Variables, SNR>'+str(snr),fontsize=20)
      plt.tight_layout()
-     plt.savefig('20250620b_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
+     plt.savefig(today_str+'b_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
    plt.clf()
    plt.close()
+
+execdate='20250621'
 
 #SDSS DR8
 csvfile1='../csvfiles/gaiadr3_sdssdr8_star.csv'
