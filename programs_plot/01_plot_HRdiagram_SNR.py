@@ -117,7 +117,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
    elif(flag_binary==True):
       sc = plt.scatter(x2, y2, c=z2, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
       if(len(x3)>1):
-        plt.scatter(x3, y3, c=z3, cmap='rainbow', s=3.0, marker='o', facecolors='none', vmin=snrmin,vmax=snrmax)
+        plt.scatter(x3, y3, c=z3, cmap='rainbow', s=50.0, marker='o', facecolors='none', vmin=snrmin,vmax=snrmax)
 
 # Add colorbar for SNR
    cbar = plt.colorbar(sc)
@@ -136,7 +136,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
    elif(flag_binary==True):
      plt.title('Hertzsprung–Russell Diagram \
      (colored by Parallax SNR)\nSDSS '+sdssdr+' vs. GAIA DR3: '\
-     +str(len(x2))+'Binaries, '+str(len(x3))+' Variables, SNR>'+str(snr),fontsize=20)
+     +str(len(x2))+' Binaries, '+str(len(x3))+' Variables, SNR>'+str(snr),fontsize=20)
      plt.tight_layout()
      plt.savefig('20250620b_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
    plt.clf()
