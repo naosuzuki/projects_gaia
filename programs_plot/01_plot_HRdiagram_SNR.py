@@ -140,13 +140,15 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
      (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3 : '\
      +str(len(x))+' Stars,  SNR>'+str(snr),fontsize=20)
      plt.tight_layout()
-     plt.savefig(today_str+'a_GAIADR3vs'+sdssdr.strip()+'_SNR'+str(snr)+'.png')
+     sdss_dr=sdssdr.strip()
+     plt.savefig(today_str+'a_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'.png')
    elif(flag_binary==True):
      plt.title('Hertzsprung–Russell Diagram \
      (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3: '\
      +str(len(x2))+' Binaries, '+str(len(x3))+' Variables, SNR>'+str(snr),fontsize=20)
      plt.tight_layout()
-     plt.savefig(today_str+'b_GAIADR3vs'+sdssdr.strip()+'_SNR'+str(snr)+'.png')
+     sdss_dr=sdssdr.strip()
+     plt.savefig(today_str+'b_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'.png')
    plt.clf()
    plt.close()
 
