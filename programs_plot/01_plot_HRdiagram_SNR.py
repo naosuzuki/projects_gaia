@@ -129,13 +129,13 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
 
    if(flag_binary==False):
      plt.title('Hertzsprung–Russell Diagram \
-     (colored by Parallax SNR)\nSDSS '+sdssdr+' vs. GAIA DR3 : '\
+     (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3 : '\
      +str(len(x))+' Stars,  SNR>'+str(snr),fontsize=20)
      plt.tight_layout()
      plt.savefig('20250620a_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
    elif(flag_binary==True):
      plt.title('Hertzsprung–Russell Diagram \
-     (colored by Parallax SNR)\nSDSS '+sdssdr+' vs. GAIA DR3: '\
+     (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3: '\
      +str(len(x2))+' Binaries, '+str(len(x3))+' Variables, SNR>'+str(snr),fontsize=20)
      plt.tight_layout()
      plt.savefig('20250620b_GAIADR3vsSDSS'+sdssdr+'_SNR'+str(snr)+'.png')
@@ -153,12 +153,12 @@ plot_parallax_SNR_histogram2(csvfile1,csvfile2)
 
 for snr in [5,10,20,50,100,200]:
    print(snr)
-   sdssdr='DR8'
+   sdssdr='SDSS DR8'
    flag_binary=True
    plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary)
    flag_binary=False
    plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary)
-   sdssdr='DR17'
+   sdssdr='SDSS DR17'
    flag_binary=True
    plot_HRdiagramSNR(csvfile2,snr,sdssdr,flag_binary)
    flag_binary=False
