@@ -158,16 +158,17 @@ execdate='20250621'
 #SDSS DR8
 csvfile1='../csvfiles/gaiadr3_sdssdr8_star.csv'
 csvfile1='../csvfiles/gaiadr3_desidr1_star1.csv'
+csvfile1='../csvfiles/gaiadr3_desidr1_star.csv'
 
 #SDSS DR17
 csvfile2='../csvfiles/gaiadr3_sdssdr17_star.csv'
 csvfile2='../csvfiles/gaiadr3_desidr1_star2.csv'
 
-dftmp1=pd.read_csv(csvfile1)
-dftmp2=pd.read_csv(csvfile2)
-dftmp3=pd.concat([dftmp1, dftmp2], ignore_index=True)
-dftmp3.to_csv('../csvfiles/gaiadr3_desidr1_star.csv')
-sys.exit(1)
+#dftmp1=pd.read_csv(csvfile1)
+#dftmp2=pd.read_csv(csvfile2)
+#dftmp3=pd.concat([dftmp1, dftmp2], ignore_index=True)
+#dftmp3.to_csv('../csvfiles/gaiadr3_desidr1_star.csv')
+#sys.exit(1)
 
 # Draw SNR Histogram
 plot_parallax_SNR_histogram2(csvfile1,csvfile2)
@@ -176,13 +177,15 @@ for snr in [5,10,20,50,100,200]:
    print(snr)
    sdssdr='SDSS DR8'
    sdssdr='DESI DR1a'
+   sdssdr='DESI DR1'
    flag_binary=True
    plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary)
    flag_binary=False
    plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary)
+   #sys.exit(1)
    sdssdr='SDSS DR17'
    sdssdr='DESI DR1b'
    flag_binary=True
-   plot_HRdiagramSNR(csvfile2,snr,sdssdr,flag_binary)
+   #plot_HRdiagramSNR(csvfile2,snr,sdssdr,flag_binary)
    flag_binary=False
-   plot_HRdiagramSNR(csvfile2,snr,sdssdr,flag_binary)
+   #plot_HRdiagramSNR(csvfile2,snr,sdssdr,flag_binary)
