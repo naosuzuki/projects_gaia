@@ -63,10 +63,12 @@ def plot_parallax_SNR_histogram(csvfile):
 def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
    df=pd.read_csv(csvfile)
 # Extract data above Parallax SNR threshold
+#  df0: all
    df0=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0)] 
 
 # SNR Condition
 # Binary Exclusion is added on 6/20/2025
+#  df1 : Binaries and Variables are excluded
    df1=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0) \
    & (df['non_single_star']==False) & (df['ruwe']<1.4) \
    & (df['phot_variable_flag']!='VARIABLE')]
