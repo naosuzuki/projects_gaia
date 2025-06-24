@@ -153,8 +153,6 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
    plt.clf()
    plt.close()
 
-execdate='20250621'
-
 #SDSS DR8
 csvfile1='../csvfiles/gaiadr3_sdssdr8_star.csv'
 csvfile1='../csvfiles/gaiadr3_desidr1_star1.csv'
