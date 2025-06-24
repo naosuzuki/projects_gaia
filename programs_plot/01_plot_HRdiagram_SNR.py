@@ -162,12 +162,6 @@ csvfile1='../csvfiles/gaiadr3_desidr1_star.csv'
 csvfile2='../csvfiles/gaiadr3_sdssdr17_star.csv'
 csvfile2='../csvfiles/gaiadr3_desidr1_star2.csv'
 
-#dftmp1=pd.read_csv(csvfile1)
-#dftmp2=pd.read_csv(csvfile2)
-#dftmp3=pd.concat([dftmp1, dftmp2], ignore_index=True)
-#dftmp3.to_csv('../csvfiles/gaiadr3_desidr1_star.csv')
-#sys.exit(1)
-
 # Draw SNR Histogram
 plot_parallax_SNR_histogram2(csvfile1,csvfile2)
 
