@@ -63,6 +63,8 @@ def plot_parallax_SNR_histogram(csvfile):
 def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
    df=pd.read_csv(csvfile)
 # Extract data above Parallax SNR threshold
+   df0=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0)] 
+
 # SNR Condition
 # Binary Exclusion is added on 6/20/2025
    df1=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0) \
@@ -82,6 +84,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
    df6=df5[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
 
 # Extract Color
+   x0=df0['bp_rp'].to_numpy()
    x=df2['bp_rp'].to_numpy()
    x2=df4['bp_rp'].to_numpy()
    x3=df6['bp_rp'].to_numpy()
