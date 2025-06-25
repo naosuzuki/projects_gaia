@@ -155,7 +155,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
 
 # Today's String YYYYMMDD
    today_str = date.today().strftime("%Y%m%d")
-#   if(flag_binary==False):
+# Case 1 : All Stars
    if(flag_binary==True and flag_variable==True):
      sc = plt.scatter(x0, y0, c=z0, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
 # Add colorbar for SNR
@@ -167,6 +167,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
      plt.tight_layout()
      sdss_dr=sdssdr.replace(" ","")
      plt.savefig(today_str+'a_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_all.png')
+# Case 2 : Only Binaries
    elif(flag_binary==True and flag_variable==False):
      sc = plt.scatter(x2, y2, c=z2, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
 # Add colorbar for SNR
@@ -178,6 +179,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
      plt.tight_layout()
      sdss_dr=sdssdr.replace(" ","")
      plt.savefig(today_str+'b_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_binary.png')
+# Case 3 : Only Variable Stars
    elif(flag_binary==False and flag_variable==True):
      sc = plt.scatter(x3, y3, c=z3, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
 # Add colorbar for SNR
@@ -189,6 +191,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
      plt.tight_layout()
      sdss_dr=sdssdr.replace(" ","")
      plt.savefig(today_str+'c_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_variable.png')
+# Case 4 : Purified Stars (Excluding Binary and Variables)
    elif(flag_binary==False and flag_variable==False):
      sc = plt.scatter(x1, y1, c=z1, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
 # Add colorbar for SNR
@@ -204,9 +207,9 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
    plt.close()
 
 #SDSS DR8
-csvfile1='../csvfiles/gaiadr3_sdssdr8_star.csv'
 csvfile1='../csvfiles/gaiadr3_desidr1_star1.csv'
 csvfile1='../csvfiles/gaiadr3_desidr1_star.csv'
+csvfile1='../csvfiles/gaiadr3_sdssdr8_star.csv'
 
 #SDSS DR17
 csvfile2='../csvfiles/gaiadr3_sdssdr17_star.csv'
@@ -217,8 +220,8 @@ csvfile2='../csvfiles/gaiadr3_desidr1_star2.csv'
 
 for snr in [5,10,20,50,100,200]:
    print(snr)
-   sdssdr='SDSS DR8'
    sdssdr='DESI DR1'
+   sdssdr='SDSS DR8'
    flag_binary=True  ; flag_variable=True
    plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary,flag_variable)
    flag_binary=True  ; flag_variable=False
