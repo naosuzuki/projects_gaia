@@ -147,7 +147,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
    if(snr==50): snrmin=50.0 ; snrmax=200.0
    if(snr==100): snrmin=100.0 ; snrmax=200.0
    if(snr==200): snrmin=200.0 ; snrmax=500.0
-
+   if(snr==400): snrmin=400.0 ; snrmax=500.0
 
 # Labels and title
    plt.xlabel('BP - RP Color',fontsize=20)
@@ -156,7 +156,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
 # Today's String YYYYMMDD
    today_str = date.today().strftime("%Y%m%d")
 # Case 1 : All Stars
-   if(flag_binary==True and flag_variable==True):
+   if(flag_binary==True and flag_variable==True and len(x0)>0):
      sc = plt.scatter(x0, y0, c=z0, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
 # Add colorbar for SNR
      cbar = plt.colorbar(sc)
@@ -169,7 +169,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
      sdss_dr=sdssdr.replace(" ","")
      plt.savefig(today_str+'a_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_all.png')
 # Case 2 : Only Binaries
-   elif(flag_binary==True and flag_variable==False):
+   elif(flag_binary==True and flag_variable==False and len(x2)>0):
      sc = plt.scatter(x2, y2, c=z2, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
 # Add colorbar for SNR
      cbar = plt.colorbar(sc)
@@ -181,7 +181,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
      sdss_dr=sdssdr.replace(" ","")
      plt.savefig(today_str+'b_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_binary.png')
 # Case 3 : Only Variable Stars
-   elif(flag_binary==False and flag_variable==True):
+   elif(flag_binary==False and flag_variable==True and len(x3)>0):
      sc = plt.scatter(x3, y3, c=z3, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
 # Add colorbar for SNR
      cbar = plt.colorbar(sc)
@@ -193,7 +193,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
      sdss_dr=sdssdr.replace(" ","")
      plt.savefig(today_str+'c_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_variable.png')
 # Case 4 : Purified Stars (Excluding Binary and Variables)
-   elif(flag_binary==False and flag_variable==False):
+   elif(flag_binary==False and flag_variable==False and len(x1)>0):
      sc = plt.scatter(x1, y1, c=z1, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
 # Add colorbar for SNR
      cbar = plt.colorbar(sc)
@@ -201,7 +201,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
      plt.title('Hertzsprung–Russell Diagram \
      (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3: '\
      +str(len(x1))+' Stars, SNR>'+str(snr)+' \n'\
-     +str(len(x2))+' Binaries and '+str(len(x3))+' Variables are excluded',fontsize=20)
+     +str(len(x2))+' Binaries and '+str(len(x3))+' Variables are Excluded',fontsize=20)
      plt.tight_layout()
      sdss_dr=sdssdr.replace(" ","")
      plt.savefig(today_str+'d_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_good.png')
