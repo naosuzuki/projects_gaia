@@ -60,7 +60,7 @@ def plot_parallax_SNR_histogram(csvfile):
    plt.hist(snr_arr,bins,log=True,align='left',rwidth=0.9,color='r')
    plt.savefig('histexp.png')
 
-def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
+def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
    df=pd.read_csv(csvfile)
 # Extract data above Parallax SNR threshold
 #  df0: all
@@ -209,16 +209,19 @@ plot_parallax_SNR_histogram2(csvfile1,csvfile2)
 for snr in [5,10,20,50,100,200]:
    print(snr)
    sdssdr='SDSS DR8'
-   sdssdr='DESI DR1a'
    sdssdr='DESI DR1'
-   flag_binary=True
-   plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary)
-   flag_binary=False
-   plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary)
+   flag_binary=True  ; flag_variable=True
+   plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary,flag_variable)
+   flag_binary=True  ; flag_variable=False
+   plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary,flag_variable)
+   flag_binary=False ; flag_variable=True
+   plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary,flag_variable)
+   flag_binary=False ; flag_variable=False
+   plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary,flag_variable)
    #sys.exit(1)
-   sdssdr='SDSS DR17'
-   sdssdr='DESI DR1b'
-   flag_binary=True
+   #sdssdr='SDSS DR17'
+   #sdssdr='DESI DR1b'
+   #flag_binary=True
    #plot_HRdiagramSNR(csvfile2,snr,sdssdr,flag_binary)
-   flag_binary=False
+   #flag_binary=False
    #plot_HRdiagramSNR(csvfile2,snr,sdssdr,flag_binary)
