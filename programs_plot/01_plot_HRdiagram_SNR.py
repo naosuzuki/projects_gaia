@@ -147,7 +147,8 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
    if(snr==50): snrmin=50.0 ; snrmax=200.0
    if(snr==100): snrmin=100.0 ; snrmax=200.0
    if(snr==200): snrmin=200.0 ; snrmax=500.0
-   if(snr==400): snrmin=400.0 ; snrmax=500.0
+   if(snr==400): snrmin=400.0 ; snrmax=800.0
+   if(snr==500): snrmin=500.0 ; snrmax=1000.0
 
 # Labels and title
    plt.xlabel('BP - RP Color',fontsize=20)
@@ -220,7 +221,7 @@ csvfile2='../csvfiles/gaiadr3_desidr1_star2.csv'
 # Draw SNR Histogram
 #plot_parallax_SNR_histogram2(csvfile1,csvfile2)
 
-for snr in [5,10,20,50,100,200,400]:
+for snr in [5,10,20,50,100,200,400,500]:
    print(snr)
    sdssdr='SDSS DR8'
    sdssdr='DESI DR1'
