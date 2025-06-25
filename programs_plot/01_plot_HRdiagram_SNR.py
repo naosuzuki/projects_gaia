@@ -213,6 +213,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
 csvfile1='../csvfiles/gaiadr3_desidr1_star1.csv'
 csvfile1='../csvfiles/gaiadr3_sdssdr8_star.csv'
 csvfile1='../csvfiles/gaiadr3_desidr1_star.csv'
+csvfile1='../csvfiles/gaiadr3_sdssdr17_star.csv'
 
 #SDSS DR17
 csvfile2='../csvfiles/gaiadr3_sdssdr17_star.csv'
@@ -223,8 +224,8 @@ csvfile2='../csvfiles/gaiadr3_desidr1_star2.csv'
 
 for snr in [5,10,20,50,100,200,400,500]:
    print(snr)
-   sdssdr='SDSS DR8'
    sdssdr='DESI DR1'
+   sdssdr='SDSS DR17'
    flag_binary=True  ; flag_variable=True
    plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary,flag_variable)
    flag_binary=True  ; flag_variable=False
