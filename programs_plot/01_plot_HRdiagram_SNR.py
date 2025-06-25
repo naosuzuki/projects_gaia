@@ -147,14 +147,6 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
    if(snr==50): snrmin=50.0 ; snrmax=200.0
    if(snr==100): snrmin=100.0 ; snrmax=200.0
    if(snr==200): snrmin=200.0 ; snrmax=500.0
-   if(flag_binary==True and flag_vaiable==True):
-      sc = plt.scatter(x0, y0, c=z0, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
-   elif(flag_binary==True and flag_variable==False):
-      sc = plt.scatter(x2, y2, c=z2, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
-   elif(flag_binary==False and flag_variable==True):
-      sc = plt.scatter(x3, y3, c=z3, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
-   elif(flag_binary==False and flag_variable==False):
-      sc = plt.scatter(x1, y1, c=z1, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
 
 # Add colorbar for SNR
    cbar = plt.colorbar(sc)
@@ -166,20 +158,39 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
 
 # Today's String YYYYMMDD
    today_str = date.today().strftime("%Y%m%d")
-   if(flag_binary==False):
+#   if(flag_binary==False):
+   if(flag_binary==True and flag_vaiable==True):
+     sc = plt.scatter(x0, y0, c=z0, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
      plt.title('Hertzsprung–Russell Diagram \
      (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3 : '\
-     +str(len(x))+' Stars,  SNR>'+str(snr),fontsize=20)
+     +str(len(x0))+' All Stars,  SNR>'+str(snr),fontsize=20)
      plt.tight_layout()
      sdss_dr=sdssdr.replace(" ","")
-     plt.savefig(today_str+'a_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'.png')
-   elif(flag_binary==True):
+     plt.savefig(today_str+'a_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_all.png')
+   elif(flag_binary==True and flag_variable==False):
+     sc = plt.scatter(x2, y2, c=z2, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
      plt.title('Hertzsprung–Russell Diagram \
      (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3: '\
-     +str(len(x2))+' Binaries, '+str(len(x3))+' Variables, SNR>'+str(snr),fontsize=20)
+     +str(len(x2))+' Binary Stars, SNR>'+str(snr),fontsize=20)
      plt.tight_layout()
      sdss_dr=sdssdr.replace(" ","")
-     plt.savefig(today_str+'b_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'.png')
+     plt.savefig(today_str+'b_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_binary.png')
+   elif(flag_binary==False and flag_variable==True):
+     sc = plt.scatter(x3, y3, c=z3, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
+     plt.title('Hertzsprung–Russell Diagram \
+     (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3: '\
+     +str(len(x3))+' Variable Stars, SNR>'+str(snr),fontsize=20)
+     plt.tight_layout()
+     sdss_dr=sdssdr.replace(" ","")
+     plt.savefig(today_str+'c_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_variable.png')
+   elif(flag_binary==False and flag_variable==False):
+     sc = plt.scatter(x1, y1, c=z1, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
+     plt.title('Hertzsprung–Russell Diagram \
+     (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3: '\
+     +str(len(x1))+' Stars, '+str(len(x3))+' Variables, SNR>'+str(snr),fontsize=20)
+     plt.tight_layout()
+     sdss_dr=sdssdr.replace(" ","")
+     plt.savefig(today_str+'d_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_good.png')
    plt.clf()
    plt.close()
 
