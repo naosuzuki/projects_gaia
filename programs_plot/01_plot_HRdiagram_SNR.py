@@ -148,9 +148,6 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
    if(snr==100): snrmin=100.0 ; snrmax=200.0
    if(snr==200): snrmin=200.0 ; snrmax=500.0
 
-# Add colorbar for SNR
-   cbar = plt.colorbar(sc)
-   cbar.set_label('Parallax Signal-to-Noise Ratio (SNR)',fontsize=20)
 
 # Labels and title
    plt.xlabel('BP - RP Color',fontsize=20)
@@ -159,8 +156,11 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
 # Today's String YYYYMMDD
    today_str = date.today().strftime("%Y%m%d")
 #   if(flag_binary==False):
-   if(flag_binary==True and flag_vaiable==True):
+   if(flag_binary==True and flag_variable==True):
      sc = plt.scatter(x0, y0, c=z0, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
+# Add colorbar for SNR
+     cbar = plt.colorbar(sc)
+     cbar.set_label('Parallax Signal-to-Noise Ratio (SNR)',fontsize=20)
      plt.title('Hertzsprung–Russell Diagram \
      (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3 : '\
      +str(len(x0))+' All Stars,  SNR>'+str(snr),fontsize=20)
@@ -169,6 +169,9 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
      plt.savefig(today_str+'a_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_all.png')
    elif(flag_binary==True and flag_variable==False):
      sc = plt.scatter(x2, y2, c=z2, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
+# Add colorbar for SNR
+     cbar = plt.colorbar(sc)
+     cbar.set_label('Parallax Signal-to-Noise Ratio (SNR)',fontsize=20)
      plt.title('Hertzsprung–Russell Diagram \
      (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3: '\
      +str(len(x2))+' Binary Stars, SNR>'+str(snr),fontsize=20)
@@ -177,6 +180,9 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
      plt.savefig(today_str+'b_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_binary.png')
    elif(flag_binary==False and flag_variable==True):
      sc = plt.scatter(x3, y3, c=z3, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
+# Add colorbar for SNR
+     cbar = plt.colorbar(sc)
+     cbar.set_label('Parallax Signal-to-Noise Ratio (SNR)',fontsize=20)
      plt.title('Hertzsprung–Russell Diagram \
      (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3: '\
      +str(len(x3))+' Variable Stars, SNR>'+str(snr),fontsize=20)
@@ -185,6 +191,9 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
      plt.savefig(today_str+'c_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_variable.png')
    elif(flag_binary==False and flag_variable==False):
      sc = plt.scatter(x1, y1, c=z1, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
+# Add colorbar for SNR
+     cbar = plt.colorbar(sc)
+     cbar.set_label('Parallax Signal-to-Noise Ratio (SNR)',fontsize=20)
      plt.title('Hertzsprung–Russell Diagram \
      (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3: '\
      +str(len(x1))+' Stars, '+str(len(x3))+' Variables, SNR>'+str(snr),fontsize=20)
@@ -204,7 +213,7 @@ csvfile2='../csvfiles/gaiadr3_sdssdr17_star.csv'
 csvfile2='../csvfiles/gaiadr3_desidr1_star2.csv'
 
 # Draw SNR Histogram
-plot_parallax_SNR_histogram2(csvfile1,csvfile2)
+#plot_parallax_SNR_histogram2(csvfile1,csvfile2)
 
 for snr in [5,10,20,50,100,200]:
    print(snr)
