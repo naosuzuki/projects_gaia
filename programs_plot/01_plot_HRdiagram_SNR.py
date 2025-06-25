@@ -65,6 +65,11 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
 # Extract data above Parallax SNR threshold
 #  df0: all
    df0=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0)] 
+   x0=df0['bp_rp'].to_numpy() 
+   gmag0=df0['phot_g_mean_mag'].to_numpy()
+   parallax0=df0['parallax'].to_numpy()
+   y0=gmag0+5.0*numpy.log10(parallax0)-10.0
+   z0=df0['parallax_over_error']
 
 # SNR Condition
 # Binary Exclusion is added on 6/20/2025
@@ -72,18 +77,36 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
    df1=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0) \
    & (df['non_single_star']==False) & (df['ruwe']<1.4) \
    & (df['phot_variable_flag']!='VARIABLE')]
+   x1=df1['bp_rp'].to_numpy() 
+   gmag1=df1['phot_g_mean_mag'].to_numpy()
+   parallax1=df1['parallax'].to_numpy()
+   y1=gmag1+5.0*numpy.log10(parallax1)-10.0
+   z1=df1['parallax_over_error']
+
 # Extract 4 columns
-   df2=df1[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
+#   df2=df1[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
 
 # Binary Star Data
-   df3=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0) \
+   df2=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0) \
    & ((df['non_single_star']==True) | (df['ruwe']>1.4))]
-   df4=df3[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
+   x2=df2['bp_rp'].to_numpy() 
+   gmag2=df2['phot_g_mean_mag'].to_numpy()
+   parallax2=df2['parallax'].to_numpy()
+   y2=gmag2+5.0*numpy.log10(parallax2)-10.0
+   z2=df2['parallax_over_error']
+
+#   df4=df3[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
 
 # Variable Star Data
-   df5=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0) \
+   df3=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0) \
    & (df['phot_variable_flag']=='VARIABLE')]
-   df6=df5[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
+   x3=df3['bp_rp'].to_numpy() 
+   gmag3=df3['phot_g_mean_mag'].to_numpy()
+   parallax3=df3['parallax'].to_numpy()
+   y3=gmag3+5.0*numpy.log10(parallax3)-10.0
+   z3=df3['parallax_over_error']
+
+#   df6=df5[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
 
 # Extract Color
    x0=df0['bp_rp'].to_numpy()
