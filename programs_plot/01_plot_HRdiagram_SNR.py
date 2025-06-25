@@ -199,7 +199,8 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
      cbar.set_label('Parallax Signal-to-Noise Ratio (SNR)',fontsize=20)
      plt.title('Hertzsprung–Russell Diagram \
      (colored by Parallax SNR)\n'+sdssdr+' vs. GAIA DR3: '\
-     +str(len(x1))+' Stars, '+str(len(x3))+' Variables, SNR>'+str(snr),fontsize=20)
+     +str(len(x1))+' Stars, SNR>'+str(snr)+' \n'\
+     +str(len(x2))+' Binaries and '+str(len(x3))+' Variables are excluded',fontsize=20)
      plt.tight_layout()
      sdss_dr=sdssdr.replace(" ","")
      plt.savefig(today_str+'d_GAIADR3vs'+sdss_dr+'_SNR'+str(snr)+'_good.png')
