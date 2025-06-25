@@ -72,7 +72,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
    z0=df0['parallax_over_error']
 
 # SNR Condition
-# Binary Exclusion is added on 6/20/2025
+# Binary and Variable Exclusion is added on 6/20/2025
 #  df1 : Binaries and Variables are excluded
    df1=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0) \
    & (df['non_single_star']==False) & (df['ruwe']<1.4) \
@@ -109,26 +109,26 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
 #   df6=df5[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
 
 # Extract Color
-   x0=df0['bp_rp'].to_numpy()
-   x=df2['bp_rp'].to_numpy()
-   x2=df4['bp_rp'].to_numpy()
-   x3=df6['bp_rp'].to_numpy()
+#   x0=df0['bp_rp'].to_numpy()
+#   x=df2['bp_rp'].to_numpy()
+#   x2=df4['bp_rp'].to_numpy()
+#   x3=df6['bp_rp'].to_numpy()
 # GAIA g-mag
-   gmag=df2['phot_g_mean_mag'].to_numpy()
-   gmag2=df4['phot_g_mean_mag'].to_numpy()
-   gmag3=df6['phot_g_mean_mag'].to_numpy()
+#   gmag=df2['phot_g_mean_mag'].to_numpy()
+#   gmag2=df4['phot_g_mean_mag'].to_numpy()
+#   gmag3=df6['phot_g_mean_mag'].to_numpy()
 # Extract Parallax
-   parallax=df2['parallax'].to_numpy()
-   parallax2=df4['parallax'].to_numpy()
-   parallax3=df6['parallax'].to_numpy()
+#   parallax=df2['parallax'].to_numpy()
+#   parallax2=df4['parallax'].to_numpy()
+#   parallax3=df6['parallax'].to_numpy()
 # Convert g-mag to Absolute Magnitude
-   y=gmag+5.0*numpy.log10(parallax)-10.0
-   y2=gmag2+5.0*numpy.log10(parallax2)-10.0
-   y3=gmag3+5.0*numpy.log10(parallax3)-10.0
+#   y=gmag+5.0*numpy.log10(parallax)-10.0
+#   y2=gmag2+5.0*numpy.log10(parallax2)-10.0
+#   y3=gmag3+5.0*numpy.log10(parallax3)-10.0
 # Parallax SNR
-   z=df2['parallax_over_error']
-   z2=df4['parallax_over_error']
-   z3=df6['parallax_over_error']
+#   z=df2['parallax_over_error']
+#   z2=df4['parallax_over_error']
+#   z3=df6['parallax_over_error']
 
    # Plotting the HR diagram
    plt.rcParams['font.family'] = 'Times New Roman'
@@ -147,12 +147,14 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary):
    if(snr==50): snrmin=50.0 ; snrmax=200.0
    if(snr==100): snrmin=100.0 ; snrmax=200.0
    if(snr==200): snrmin=200.0 ; snrmax=500.0
-   if(flag_binary==False):
-      sc = plt.scatter(x, y, c=z, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
-   elif(flag_binary==True):
+   if(flag_binary==True and flag_vaiable==True):
+      sc = plt.scatter(x0, y0, c=z0, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
+   elif(flag_binary==True and flag_variable==False):
       sc = plt.scatter(x2, y2, c=z2, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
-      if(len(x3)>1):
-        plt.scatter(x3, y3, c=z3, cmap='rainbow', s=50.0, marker='o', facecolors='none', vmin=snrmin,vmax=snrmax)
+   elif(flag_binary==False and flag_variable==True):
+      sc = plt.scatter(x3, y3, c=z3, cmap='rainbow', s=0.5, vmin=snrmin,vmax=snrmax)
+   elif(flag_binary==False and flag_variable==False):
+      sc = plt.scatter(x1, y1, c=z1, cmap='rainbow', s=0.05, vmin=snrmin,vmax=snrmax)
 
 # Add colorbar for SNR
    cbar = plt.colorbar(sc)
