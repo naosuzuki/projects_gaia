@@ -103,29 +103,7 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
    y3=gmag3+5.0*numpy.log10(parallax3)-10.0
    z3=df3['parallax_over_error']
 
-# Extract Color
-#   x0=df0['bp_rp'].to_numpy()
-#   x=df2['bp_rp'].to_numpy()
-#   x2=df4['bp_rp'].to_numpy()
-#   x3=df6['bp_rp'].to_numpy()
-# GAIA g-mag
-#   gmag=df2['phot_g_mean_mag'].to_numpy()
-#   gmag2=df4['phot_g_mean_mag'].to_numpy()
-#   gmag3=df6['phot_g_mean_mag'].to_numpy()
-# Extract Parallax
-#   parallax=df2['parallax'].to_numpy()
-#   parallax2=df4['parallax'].to_numpy()
-#   parallax3=df6['parallax'].to_numpy()
-# Convert g-mag to Absolute Magnitude
-#   y=gmag+5.0*numpy.log10(parallax)-10.0
-#   y2=gmag2+5.0*numpy.log10(parallax2)-10.0
-#   y3=gmag3+5.0*numpy.log10(parallax3)-10.0
-# Parallax SNR
-#   z=df2['parallax_over_error']
-#   z2=df4['parallax_over_error']
-#   z3=df6['parallax_over_error']
-
-   # Plotting the HR diagram
+# Plotting the HR diagram
    plt.rcParams['font.family'] = 'Times New Roman'
    plt.figure(figsize=(8.5, 11))
 # Invert Y-axis: brighter stars are at the top
