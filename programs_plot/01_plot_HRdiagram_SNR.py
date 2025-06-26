@@ -62,6 +62,24 @@ def plot_parallax_SNR_histogram(csvfile):
    plt.hist(snr_arr,bins,log=True,align='left',rwidth=0.8,color='r')
    plt.savefig('histexpdesi.png')
 
+def plot_cumulativeSNR(csvfiles)
+   df=pd.read_csv(csvfile)
+# Extract data above Parallax SNR threshold
+   df1=df[df['parallax']>0.0]
+   df2=df1[['parallax','parallax_over_error']]
+   snr_arr=df2['parallax_over_error'].to_numpy()
+
+arr = np.array([5, 2, 7, 2, 5])
+sorted_arr = np.sort(arr)
+cum_counts = np.arange(1, len(arr)+1)
+
+# For plotting or tabulation:
+import matplotlib.pyplot as plt
+plt.step(sorted_arr, cum_counts, where='post')
+plt.xlabel('Value')
+plt.ylabel('Cumulative Count')
+plt.show()
+
 def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
    df=pd.read_csv(csvfile)
 # Extract data above Parallax SNR threshold
