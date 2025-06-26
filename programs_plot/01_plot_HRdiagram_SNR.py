@@ -49,15 +49,17 @@ def plot_parallax_SNR_histogram(csvfile):
    df2=df1[['parallax','parallax_over_error']]
    snr_arr=df2['parallax_over_error'].to_numpy()
 
-   bins=numpy.arange(20)*10.0
+   bins=numpy.arange(55)*10.0
    plt.rcParams["font.family"] = "Times New Roman"
    plt.title('GAIA DR3')
    plt.xlabel('GAIA DR3 SNR')
    plt.ylabel('Number of Stars')
-   plt.xlim([-5,205])
+   #plt.xlim([-5,205])
+   plt.xlim([-5,525])
    plt.tick_params(axis='both',which='both',direction='in') 
-   plt.ylim([1.2,4.0e5])
-   plt.hist(snr_arr,bins,log=True,align='left',rwidth=0.9,color='r')
+   #plt.ylim([1.2,4.0e5])
+   plt.ylim([1.2,4.0e6])
+   plt.hist(snr_arr,bins,log=True,align='left',rwidth=0.8,color='r')
    plt.savefig('histexpdesi.png')
 
 def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
