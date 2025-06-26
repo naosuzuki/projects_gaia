@@ -58,7 +58,7 @@ def plot_parallax_SNR_histogram(csvfile):
    plt.tick_params(axis='both',which='both',direction='in') 
    plt.ylim([1.2,4.0e5])
    plt.hist(snr_arr,bins,log=True,align='left',rwidth=0.9,color='r')
-   plt.savefig('histexp.png')
+   plt.savefig('histexpdesi.png')
 
 def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
    df=pd.read_csv(csvfile)
@@ -204,9 +204,11 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
 
 #SDSS DR8
 csvfile1='../csvfiles/gaiadr3_desidr1_star1.csv'
-csvfile1='../csvfiles/gaiadr3_desidr1_star.csv'
 csvfile1='../csvfiles/gaiadr3_sdssdr8_star.csv'
 csvfile1='../csvfiles/gaiadr3_sdssdr17_star.csv'
+csvfile1='../csvfiles/gaiadr3_desidr1_star.csv'
+plot_parallax_SNR_histogram(csvfile1)
+sys.exit(1)
 
 #SDSS DR17
 csvfile2='../csvfiles/gaiadr3_sdssdr17_star.csv'
@@ -217,9 +219,9 @@ csvfile2='../csvfiles/gaiadr3_desidr1_star2.csv'
 
 for snr in [5,10,20,50,100,200,400,500]:
    print(snr)
-   sdssdr='DESI DR1'
    sdssdr='SDSS DR8'
    sdssdr='SDSS DR17'
+   sdssdr='DESI DR1'
    flag_binary=True  ; flag_variable=True
    plot_HRdiagramSNR(csvfile1,snr,sdssdr,flag_binary,flag_variable)
    flag_binary=True  ; flag_variable=False
