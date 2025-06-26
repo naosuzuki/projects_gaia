@@ -83,9 +83,6 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
    y1=gmag1+5.0*numpy.log10(parallax1)-10.0
    z1=df1['parallax_over_error']
 
-# Extract 4 columns
-#   df2=df1[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
-
 # Binary Star Data
    df2=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0) \
    & ((df['non_single_star']==True) | (df['ruwe']>1.4))]
@@ -95,8 +92,6 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
    y2=gmag2+5.0*numpy.log10(parallax2)-10.0
    z2=df2['parallax_over_error']
 
-#   df4=df3[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
-
 # Variable Star Data
    df3=df[(df['parallax_over_error']>=snr) & (df['parallax']>0.0) \
    & (df['phot_variable_flag']=='VARIABLE')]
@@ -105,8 +100,6 @@ def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
    parallax3=df3['parallax'].to_numpy()
    y3=gmag3+5.0*numpy.log10(parallax3)-10.0
    z3=df3['parallax_over_error']
-
-#   df6=df5[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error']]
 
 # Extract Color
 #   x0=df0['bp_rp'].to_numpy()
