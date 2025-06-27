@@ -62,7 +62,7 @@ def plot_parallax_SNR_histogram(csvfile):
    plt.hist(snr_arr,bins,log=True,align='left',rwidth=0.8,color='r')
    plt.savefig('histexpdesi.png')
 
-def plot_cumulativeSNR(csvfiles,sdssdr)
+def plot_cumulativeSNR(csvfile,sdssdr):
    df=pd.read_csv(csvfile)
 # Extract data above Parallax SNR threshold
    df1=df[df['parallax']>0.0]
@@ -75,9 +75,12 @@ def plot_cumulativeSNR(csvfiles,sdssdr)
 
 # For plotting or tabulation:
 #import matplotlib.pyplot as plt
+   plt.xlim([500,100])
    plt.step(sorted_arr, cum_counts, where='post')
    plt.xlabel('SNR')
    plt.ylabel('Cumulative Count')
+# Today's String YYYYMMDD
+   today_str = date.today().strftime("%Y%m%d")
    sdss_dr=sdssdr.replace(" ","")
    plt.savefig(today_str+'_GAIADR3vs'+sdss_dr+'_SNRcumulative.png')
    plt.clf()
