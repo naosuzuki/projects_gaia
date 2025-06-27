@@ -62,23 +62,26 @@ def plot_parallax_SNR_histogram(csvfile):
    plt.hist(snr_arr,bins,log=True,align='left',rwidth=0.8,color='r')
    plt.savefig('histexpdesi.png')
 
-def plot_cumulativeSNR(csvfiles)
+def plot_cumulativeSNR(csvfiles,sdssdr)
    df=pd.read_csv(csvfile)
 # Extract data above Parallax SNR threshold
    df1=df[df['parallax']>0.0]
    df2=df1[['parallax','parallax_over_error']]
    snr_arr=df2['parallax_over_error'].to_numpy()
 
-arr = np.array([5, 2, 7, 2, 5])
-sorted_arr = np.sort(arr)
-cum_counts = np.arange(1, len(arr)+1)
+#arr = np.array([5, 2, 7, 2, 5])
+   sorted_arr = numpy.sort(snr_arr)
+   cum_counts = numpy.arange(1, len(snr_arr)+1)
 
 # For plotting or tabulation:
-import matplotlib.pyplot as plt
-plt.step(sorted_arr, cum_counts, where='post')
-plt.xlabel('Value')
-plt.ylabel('Cumulative Count')
-plt.show()
+#import matplotlib.pyplot as plt
+   plt.step(sorted_arr, cum_counts, where='post')
+   plt.xlabel('SNR')
+   plt.ylabel('Cumulative Count')
+   sdss_dr=sdssdr.replace(" ","")
+   plt.savefig(today_str+'_GAIADR3vs'+sdss_dr+'_SNRcumulative.png')
+   plt.clf()
+   plt.close()
 
 def plot_HRdiagramSNR(csvfile,snr,sdssdr,flag_binary,flag_variable):
    df=pd.read_csv(csvfile)
@@ -205,7 +208,9 @@ csvfile1='../csvfiles/gaiadr3_desidr1_star1.csv'
 csvfile1='../csvfiles/gaiadr3_sdssdr8_star.csv'
 csvfile1='../csvfiles/gaiadr3_sdssdr17_star.csv'
 csvfile1='../csvfiles/gaiadr3_desidr1_star.csv'
-plot_parallax_SNR_histogram(csvfile1)
+#plot_parallax_SNR_histogram(csvfile1)
+sdssdr='DESI DR1'
+plot_cumulativeSNR(csvfile1,sdssdr)
 sys.exit(1)
 
 #SDSS DR17
