@@ -69,16 +69,26 @@ def plot_cumulativeSNR(csvfile,sdssdr):
    df2=df1[['parallax','parallax_over_error']]
    snr_arr=df2['parallax_over_error'].to_numpy()
 
-#arr = np.array([5, 2, 7, 2, 5])
-   sorted_arr = numpy.sort(snr_arr)
-   cum_counts = numpy.arange(1, len(snr_arr)+1)
+# Create histogram bins
+   bins = numpy.arange(snr_arr.min(), snr_arr.max() + 2)  # +2 to include upper edge
 
-# For plotting or tabulation:
-#import matplotlib.pyplot as plt
-   plt.xlim([500,100])
-   plt.step(sorted_arr, cum_counts, where='post')
-   plt.xlabel('SNR')
-   plt.ylabel('Cumulative Count')
+# Normal histogram
+   hist, bin_edges = numpy.histogram(snr_arr, bins=bins)
+
+# Cumulative in reverse: values ≥ x
+   cum_counts_reverse = numpy.cumsum(hist[::-1])[::-1]
+
+# Plot
+   plt.step(bin_edges[:-1], cum_counts_reverse, where='post')
+   plt.xlabel('Parallax SNR')
+   plt.ylabel('Cumulative Count (Parallax SNR ≥ x)')
+   plt.title('Reverse SNR Cumulative Histogram')
+   plt.grid(True)
+   plt.xlim([500,200])
+   plt.ylim([0,50000])
+   #plt.step(sorted_arr, cum_counts, where='post')
+   #plt.xlabel('SNR')
+   #plt.ylabel('Cumulative Count')
 # Today's String YYYYMMDD
    today_str = date.today().strftime("%Y%m%d")
    sdss_dr=sdssdr.replace(" ","")
