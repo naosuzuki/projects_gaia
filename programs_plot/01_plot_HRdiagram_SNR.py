@@ -222,6 +222,7 @@ csvfile1='../csvfiles/gaiadr3_sdssdr8_star.csv'
 csvfile1='../csvfiles/gaiadr3_sdssdr17_star.csv'
 csvfile1='../csvfiles/gaiadr3_desidr1_star.csv'
 csvfile1='../csvfiles/gaiadr3_desidr2_star.csv'
+csvfile1='../csvfiles/gaiadr3_desidr2pix_star.csv'
 #plot_parallax_SNR_histogram(csvfile1)
 sdssdr='DESI DR1'
 sdssdr='DESI DR2'
