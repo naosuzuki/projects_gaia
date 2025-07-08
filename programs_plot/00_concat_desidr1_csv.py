@@ -11,6 +11,13 @@ csvfile3='../csvfiles/gaiadr3_desidr2_star3.csv'
 csvfile4='../csvfiles/gaiadr3_desidr2_star4.csv'
 csvfile5='../csvfiles/gaiadr3_desidr2_star5.csv'
 
+# DESI DR2 pix
+csvfile1='../csvfiles/gaiadr3_desidr2pix_star1.csv'
+csvfile2='../csvfiles/gaiadr3_desidr2pix_star2.csv'
+csvfile3='../csvfiles/gaiadr3_desidr2pix_star3.csv'
+csvfile4='../csvfiles/gaiadr3_desidr2pix_star4.csv'
+csvfile5='../csvfiles/gaiadr3_desidr2pix_star5.csv'
+
 def concat_desi_dr2(csvfile1,csvfile2,csvfile3,csvfile4,csvfile5):
    dftmp1=pd.read_csv(csvfile1)
    df1=dftmp1[['phot_g_mean_mag','bp_rp','parallax','parallax_over_error',\
