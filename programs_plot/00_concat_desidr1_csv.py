@@ -45,7 +45,7 @@ def concat_desi_dr2(csvfile1,csvfile2,csvfile3,csvfile4,csvfile5):
             'phot_variable_flag']]
 
    df6=pd.concat([df1, df2, df3, df4, df5], ignore_index=True)
-   df6.to_csv('../csvfiles/gaiadr3_desidr2_star.csv')
+   df6.to_csv('../csvfiles/gaiadr3_desidr2pix_star.csv')
    
 def concat_desi_dr1(csvfile1,csvfile2):
    dftmp1=pd.read_csv(csvfile1)
